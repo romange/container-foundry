@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+LABEL org.opencontainers.image.source https://github.com/romange/container-foundry
+
 # To avoid tzdata reconfigure
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y autoconf-archive bison cmake curl git libssl-dev \
