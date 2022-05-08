@@ -1,9 +1,13 @@
+# syntax=docker/dockerfile:1
 FROM ubuntu:20.04
 
 LABEL org.opencontainers.image.source https://github.com/romange/container-foundry
 
+COPY ./get_mold.sh /tmp/
+
 # To avoid tzdata reconfigure
 ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt update && apt install -y autoconf-archive bison cmake curl gdb git libssl-dev \
     libunwind-dev libfl-dev ninja-build libtool \
     gcc-9 g++-9 libboost-fiber-dev libxml2-dev zip ccache \
@@ -11,3 +15,5 @@ RUN apt update && apt install -y autoconf-archive bison cmake curl gdb git libss
     
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 40  \
     --slave /usr/bin/g++ g++ /usr/bin/g++-9
+
+RUN /tmp/get_mold.sh
