@@ -1,12 +1,10 @@
 # syntax=docker/dockerfile:1
-# I use edge to install mold. At some point we can backtrack to latest
-FROM alpine:edge    
-
+FROM alpine:latest    
 
 LABEL org.opencontainers.image.source https://github.com/romange/container-foundry
 
 # to allow installing mold
-RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+# RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
 # To avoid tzdata reconfigure
 # ENV DEBIAN_FRONTEND=noninteractive
@@ -18,4 +16,4 @@ RUN apk add autoconf-archive automake bash bison boost1.77-dev cmake coreutils \
         openssl-dev patch zip 
 
 # currently for aarch64 there is no mold
-RUN [[ $(uname -m) == "aarch64" ]] || apk add mold@testing
+# RUN [[ $(uname -m) == "aarch64" ]] || apk add mold@testing
