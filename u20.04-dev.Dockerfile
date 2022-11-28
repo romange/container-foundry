@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y autoconf-archive bison cmake curl gdb git libssl-dev \
     libunwind-dev libfl-dev ninja-build libtool \
-    gcc-9 g++-9 libboost-fiber-dev libxml2-dev zip ccache \
+    gcc-9 g++-9 libboost-fiber-dev libxml2-dev zip ccache libzstd-dev \
     && rm -rf /var/lib/apt/lists/*
     
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 40  \
