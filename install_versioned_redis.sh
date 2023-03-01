@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Script to install redis from url to release
+# Script to install redis from url to /bin
 # $1 - bin-name
 # $2 - url
 
