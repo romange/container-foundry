@@ -14,6 +14,7 @@ LABEL org.opencontainers.image.source https://github.com/romange/container-found
 RUN apk add autoconf-archive automake bash bison boost-dev cmake coreutils \
         curl ccache git gcc gdb g++ libunwind-dev libtool libxml2-dev make ninja \
         openssl-dev patch zip zstd-dev
+RUN apk add --no-cache tar
 
 # currently for aarch64 there is no mold
 # RUN [[ $(uname -m) == "aarch64" ]] || apk add mold@testing

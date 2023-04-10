@@ -10,7 +10,7 @@ COPY ./install_versioned_redis.sh /tmp/
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update 
-Run apt install -y autoconf-archive bison cmake curl gdb git libssl-dev \
+RUN apt install -y autoconf-archive bison cmake curl gdb git libssl-dev \
     libunwind-dev libfl-dev ninja-build libtool redis wget \
     gcc-9 g++-9 libboost-fiber-dev libxml2-dev zip ccache libzstd-dev 
 RUN rm -rf /var/lib/apt/lists/*
