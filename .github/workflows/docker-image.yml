@@ -13,8 +13,19 @@ jobs:
 #   Building Dev Image
 # ===============================================================
   build_dev:
-
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Test of these containers
+        include:
+          - container: "alpine-dev:latest"
+            file: alpine-dev.Dockerfile
+          - container: "ubuntu-dev:20"
+            file: u20.04-dev.Dockerfile
+          - container: "ubuntu-dev:22"
+            file: u22.04-dev.Dockerfile
+          - container: "fedora:30"
+            file: "fedora30-dev.Dockerfile"
     steps:
     - name: checkout
       uses: actions/checkout@v3
@@ -41,34 +52,12 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - 
-      name: Build ubuntu-dev:20
+      name: Build 
       uses: docker/build-push-action@v4
       with:
         context: .
         platforms: linux/amd64,linux/arm64
         push: ${{ github.event_name != 'pull_request' }}
         tags: |
-          ghcr.io/${{ github.actor }}/ubuntu-dev:20
-        file: u20.04-dev.Dockerfile
-
-    - 
-      name: Build ubuntu-dev:22
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        platforms: linux/amd64,linux/arm64
-        push: ${{ github.event_name != 'pull_request' }}
-        tags: |
-          ghcr.io/${{ github.actor }}/ubuntu-dev:22
-        file: u22.04-dev.Dockerfile
-
-    - 
-      name: Build alpine-dev
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        platforms: linux/amd64,linux/arm64
-        push: ${{ github.event_name != 'pull_request' }}
-        tags: |
-          ghcr.io/${{ github.actor }}/alpine-dev:latest
-        file: alpine-dev.Dockerfile
+          ghcr.io/${{ github.actor }}/${{ matrix.container }}
+        file: ${{ matrix.file }}

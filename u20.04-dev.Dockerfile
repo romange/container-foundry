@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update 
 RUN apt install -y autoconf-archive bison cmake curl gdb git libssl-dev \
     libunwind-dev libfl-dev ninja-build libtool redis wget \
-    gcc-9 g++-9 libboost-fiber-dev libboost-context-dev libxml2-dev zip ccache libzstd-dev \
+    gcc-9 g++-9 libboost-context-dev zip ccache libzstd-dev \
     debhelper moreutils pip jq lsof lcov \
     && rm -rf /var/lib/apt/lists/*
     
