@@ -24,6 +24,8 @@ jobs:
             file: u20.04-dev.Dockerfile
           - container: "ubuntu-dev:22"
             file: u22.04-dev.Dockerfile
+          - container: "ubuntu-dev:23.10"
+            file: "u23.10-dev.Dockerfile"
           - container: "fedora:30"
             file: "fedora30-dev.Dockerfile"
     steps:
