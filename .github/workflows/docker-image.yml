@@ -28,6 +28,8 @@ jobs:
             file: "u23.10-dev.Dockerfile"
           - container: "fedora:30"
             file: "fedora30-dev.Dockerfile"
+          - container: "centos-dev:7"
+            file: "centos7-dev.Dockerfile"
     steps:
     - name: checkout
       uses: actions/checkout@v3
