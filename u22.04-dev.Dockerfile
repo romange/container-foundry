@@ -7,8 +7,8 @@ COPY ./get_mold.sh /tmp/
 # To avoid tzdata reconfigure
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y autoconf-archive bison cmake curl gdb git libssl-dev \
-    libunwind-dev libfl-dev ninja-build libtool \
-    gcc-11 g++-11 libboost-fiber-dev libxml2-dev zip ccache \
+    libunwind-dev libfl-dev ninja-build libtool redis wget \
+    gcc-11 g++-11 libboost-fiber-dev libxml2-dev zip ccache libzstd-dev \
     debhelper moreutils pip jq lsof lcov libflatbuffers-dev \
     && rm -rf /var/lib/apt/lists/*
     
