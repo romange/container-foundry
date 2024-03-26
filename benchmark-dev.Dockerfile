@@ -16,7 +16,7 @@ RUN apt-get update && \
 RUN if [ ${TARGETPLATFORM} = "linux/amd64" ]; then \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"; \
     elif [ ${TARGETPLATFORM} = "linux/arm64" ]; then \
-    add-apt-repository "deb [arch=armhf] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"; \
+    add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"; \
     fi
 
 # Install Docker
