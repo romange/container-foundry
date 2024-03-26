@@ -1,6 +1,8 @@
 # Use the base image
 FROM ghcr.io/romange/ubuntu-dev:20 as base
 
+ARG TARGETPLATFORM
+
 # Install Node.js
 RUN apt-get update && \
     apt-get install -y nodejs npm && \
@@ -9,10 +11,16 @@ RUN apt-get update && \
 # Install Docker
 RUN apt-get update && \
     apt-get install -y apt-transport-https ca-certificates curl software-properties-common && \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
-    apt-get update && \
-    apt-get install -y docker-ce
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+RUN if [ ${TARGETPLATFORM} = "linux/amd64" ]; then \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"; \
+    elif [ ${TARGETPLATFORM} = "linux/arm64" ]; then \
+    add-apt-repository "deb [arch=armhf] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"; \
+    fi
+
+# Install Docker
+RUN apt-get update && apt-get install -y docker-ce
 
 
 # Install dependencies (if needed)
