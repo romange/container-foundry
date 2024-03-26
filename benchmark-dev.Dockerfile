@@ -23,6 +23,3 @@ RUN git clone https://github.com/RedisLabs/memtier_benchmark.git
 
 # Build memtier_benchmark
 RUN cd memtier_benchmark && autoreconf -ivf && ./configure &&  make && sudo make install
-
-# Switch back to the base stage
-FROM base as final
