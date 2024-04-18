@@ -6,8 +6,8 @@ COPY ./install_docker.sh /tmp/
 RUN /tmp/install_docker.sh
 
 # Install Node.js
-RUN apt-get install -y nodejs npm && \
-    npm install -g npm
+RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && \
+    apt-get install -y nodejs
 
 # Install dependencies (if needed)
 RUN apt-get install -y build-essential autoconf automake libpcre3-dev libevent-dev pkg-config zlib1g-dev git &&\
