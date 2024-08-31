@@ -25,12 +25,11 @@ jobs:
             file: u20.04-dev.Dockerfile
           - container: "ubuntu-dev:22"
             file: u22.04-dev.Dockerfile
-          - container: "ubuntu-dev:23.10"
-            file: u23.10-dev.Dockerfile
           - container: "fedora:30"
             file: fedora30-dev.Dockerfile
-          - container: "centos-dev:7"
-            file: centos7-dev.Dockerfile
+          # centos7 stopped working
+          # - container: "centos-dev:7"
+          #  file: centos7-dev.Dockerfile
           - container: "ubuntu-dev:24"
             file: u24.04-dev.Dockerfile
           - container: "benchmark-dev:latest"
