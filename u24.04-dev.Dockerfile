@@ -7,7 +7,7 @@ COPY ./get_mold.sh ./install_boost.sh /tmp/
 # To avoid tzdata reconfigure
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y autoconf-archive bison cmake curl gdb git libssl-dev \
-    libunwind-dev libfl-dev ninja-build libtool \
+    libunwind-dev libfl-dev ninja-build libtool clang \
     libboost-context-dev libxml2-dev zip ccache libzstd-dev \
     debhelper moreutils pip jq lsof lcov libflatbuffers-dev wget \
     && rm -rf /var/lib/apt/lists/*
