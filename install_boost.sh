@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 
-BVER=1.83.0
+BVER=1.84.0
 BOOST=boost_${BVER//./_}   # replace all . with _
 
 # For sake of boost install we always use g++.
@@ -11,7 +11,7 @@ install_boost() {
     mkdir -p /tmp/boost && pushd /tmp/boost
     
     if ! [ -d $BOOST ]; then
-      url="https://boostorg.jfrog.io/artifactory/main/release/${BVER}/source/$BOOST.tar.bz2"
+      url="https://archives.boost.io/release/${BVER}/source/$BOOST.tar.bz2"      
       echo "Downloading from $url"
       if ! [ -e $BOOST.tar.bz2 ]; then wget -nv ${url} -O $BOOST.tar.bz2; fi
 
