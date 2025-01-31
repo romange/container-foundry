@@ -6,7 +6,7 @@ COPY ./get_cmake.sh /tmp/
 
 RUN dnf install -y automake  gcc-c++ git libtool make ninja-build  \
      openssl-devel libunwind-devel autoconf-archive patch wget bzip2 \
-     openssl-static zlib-devel gdb ccache
+     openssl-static pcre2-devel zlib-devel gdb ccache
 
 RUN dnf install -y bison libzstd-static --releasever=32
 

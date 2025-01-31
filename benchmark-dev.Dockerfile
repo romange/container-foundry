@@ -1,7 +1,7 @@
-FROM bitnami/kubectl:1.29.4 as kubectl
+FROM bitnami/kubectl:1.29.4 AS kubectl
 
 # Use the base image
-FROM ghcr.io/romange/ubuntu-dev:20 as base
+FROM ghcr.io/romange/ubuntu-dev:20 AS base
 
 # Install Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && \

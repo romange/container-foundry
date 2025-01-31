@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:20.04
 
-LABEL org.opencontainers.image.source https://github.com/romange/container-foundry
+LABEL org.opencontainers.image.source="https://github.com/romange/container-foundry"
 
 COPY ./get_mold.sh /tmp/
 COPY ./install_versioned_redis.sh /tmp/
@@ -11,9 +11,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update 
 RUN apt install -y autoconf-archive bison cmake curl gdb git libssl-dev \
-    libunwind-dev libfl-dev ninja-build libtool redis wget \
+    libunwind-dev libfl-dev ninja-build libtool libpcre2-dev redis-tools wget \
     gcc-9 g++-9 libboost-context-dev zip ccache libzstd-dev \
-    debhelper moreutils pip jq lsof lcov libflatbuffers-dev \
+    debhelper moreutils pip jq lsof lcov libflatbuffers-dev pkg-config \
     && rm -rf /var/lib/apt/lists/*
     
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 40  \
