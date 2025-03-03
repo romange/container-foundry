@@ -19,7 +19,7 @@ jobs:
   build_dev:
     strategy:
       max-parallel: 6
-      matrix:        
+      matrix:
         distro:
           - name: "alpine-dev"
             tag: latest
@@ -36,6 +36,9 @@ jobs:
           - name: "ubuntu-dev"
             tag: 24
             file: u24.04-dev.Dockerfile
+          - name: "fedora"
+            tag: 41
+            file: fedora41-dev.Dockerfile
           # - container: "benchmark-dev:latest"
           #   file: benchmark-dev.Dockerfile
         image:
@@ -46,7 +49,7 @@ jobs:
 
     runs-on: ${{ matrix.image.name }}
     env:
-      image_base: ghcr.io/${{ github.repository_owner }}/${{ matrix.distro.name }}      
+      image_base: ghcr.io/${{ github.repository_owner }}/${{ matrix.distro.name }}
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v3
@@ -57,7 +60,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Collect Docker metadata
         id: metadata
         uses: docker/metadata-action@v5
@@ -70,7 +73,7 @@ jobs:
         with:
           context: .
           provenance: false
-          platforms: linux/${{ matrix.image.arch }} 
+          platforms: linux/${{ matrix.image.arch }}
           file: ${{ matrix.distro.file }}
           labels: ${{ steps.metadata.outputs.labels }}
           outputs: type=image,name=${{ env.image_base }},push-by-digest=true,name-canonical=true,push=true
@@ -81,13 +84,13 @@ jobs:
 
       - name: Test Docker image
         run: docker run --rm "${{ env.image_base }}:sha256@${{ steps.build.outputs.digest }}" echo succeeded
-  
+
       - name: Export digest
         run: |
           mkdir -p /tmp/digests
           digest="${{ steps.build.outputs.digest }}"
           touch "/tmp/digests/${digest#sha256:}"
-      
+
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
@@ -101,7 +104,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: 
+        image:
           - name: alpine-dev
             tag: latest
           - name: ubuntu-dev
@@ -112,6 +115,9 @@ jobs:
             tag: 24
           - name: fedora
             tag: 30
+          - name: fedora
+            tag: 41
+
     env:
       image_base: ghcr.io/${{ github.repository_owner }}/${{ matrix.image.name }}
       image: ghcr.io/${{ github.repository_owner }}/${{ matrix.image.name }}:${{matrix.image.tag}}
@@ -131,13 +137,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Collect Docker metadata
         id: metadata
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.image_base }}
-      
+
       - name: Create and push merged image
         working-directory: /tmp/digests
         run: |
