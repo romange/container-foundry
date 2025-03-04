@@ -16,3 +16,5 @@ RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 40  \
     --slave /usr/bin/g++ g++ /usr/bin/g++-11
 
 RUN /tmp/get_mold.sh
+RUN mkdir -p ~/.config/gdb && echo 'set history save on' >> ~/.config/gdb/gdbinit \
+    && echo 'set debuginfod enabled off' >> ~/.config/gdb/gdbinit

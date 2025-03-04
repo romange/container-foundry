@@ -11,3 +11,6 @@ RUN dnf install -y automake  gcc-c++ git libtool make ninja-build  \
 RUN dnf install -y bison libzstd-static --releasever=32
 
 RUN /tmp/install_boost.sh && /tmp/get_cmake.sh
+
+RUN mkdir -p ~/.config/gdb && echo 'set history save on' >> ~/.config/gdb/gdbinit \
+    && echo 'set debuginfod enabled off' >> ~/.config/gdb/gdbinit
