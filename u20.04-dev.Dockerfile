@@ -23,3 +23,7 @@ RUN /tmp/get_mold.sh
 RUN /tmp/install_versioned_redis.sh redis-server redis-server-6.2.11 https://github.com/redis/redis/archive/6.2.11.tar.gz
 RUN /tmp/install_versioned_redis.sh redis-server redis-server-7.2.2 https://github.com/redis/redis/archive/7.2.2.tar.gz
 RUN /tmp/install_versioned_redis.sh valkey-server valkey-server-8.0.1 https://github.com/valkey-io/valkey/archive/refs/tags/8.0.1.tar.gz
+
+RUN mkdir -p ~/.config/gdb && echo 'set history save on' >> ~/.config/gdb/gdbinit \
+    && echo 'set debuginfod enabled off' >> ~/.config/gdb/gdbinit
+    

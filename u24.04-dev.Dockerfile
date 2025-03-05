@@ -14,3 +14,5 @@ RUN apt update && apt install -y autoconf-archive bison clang cmake curl gdb git
     && rm -rf /var/lib/apt/lists/*
 
 RUN /tmp/get_mold.sh
+RUN mkdir -p ~/.config/gdb && echo 'set history save on' >> ~/.config/gdb/gdbinit \
+    && echo 'set debuginfod enabled off' >> ~/.config/gdb/gdbinit
