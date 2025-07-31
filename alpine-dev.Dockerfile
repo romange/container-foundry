@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM alpine:3.18.12    
+FROM alpine:3.20.5
 
 LABEL org.opencontainers.image.source="https://github.com/romange/container-foundry"
 
