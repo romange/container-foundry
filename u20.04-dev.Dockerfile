@@ -6,6 +6,7 @@ LABEL org.opencontainers.image.source="https://github.com/romange/container-foun
 COPY ./get_mold.sh /tmp/
 COPY ./get_openssl.sh /tmp/
 COPY ./install_versioned_redis.sh /tmp/
+COPY ./install_python_deps.sh /tmp/
 
 # To avoid tzdata reconfigure
 ENV DEBIAN_FRONTEND=noninteractive
@@ -25,7 +26,7 @@ RUN /tmp/install_versioned_redis.sh redis-server redis-server-6.2.11 https://git
 RUN /tmp/install_versioned_redis.sh redis-server redis-server-7.2.2 https://github.com/redis/redis/archive/7.2.2.tar.gz
 RUN /tmp/install_versioned_redis.sh valkey-server valkey-server-8.0.1 https://github.com/valkey-io/valkey/archive/refs/tags/8.0.1.tar.gz
 
-RUN /tmp/get_openssl.sh
+RUN /tmp/get_openssl.sh && /tmp/install_python_deps.sh
 
 # Set OpenSSL path for CMake
 ENV CMAKE_PREFIX_PATH=/usr/local/ssl  
