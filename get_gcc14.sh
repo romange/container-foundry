@@ -12,16 +12,34 @@ wget -nv https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.x
 tar -xf gcc-${GCC_VERSION}.tar.xz
 cd gcc-${GCC_VERSION}
 
-# Build
+# Build with optimization flags
+export CFLAGS="-O2 -pipe"
+export CXXFLAGS="-O2 -pipe"
+
 mkdir build && cd build
 ../configure \
     --prefix=${GCC_PREFIX} \
     --enable-languages=${GCC_LANGUAGES} \
     --disable-multilib \
-    --disable-bootstrap
+    --disable-bootstrap \
+    --disable-nls \
+    --enable-checking=release \
+    --with-system-zlib
 
-make -j$(nproc)
-make install
+make -j$(nproc) STAGE1_CFLAGS="-O2" BOOT_CFLAGS="-O2"
+make install-strip
+
+# Remove unnecessary files to reduce size
+rm -rf ${GCC_PREFIX}/share/info
+rm -rf ${GCC_PREFIX}/share/man
+rm -rf ${GCC_PREFIX}/share/locale
+rm -rf ${GCC_PREFIX}/share/gcc-*/python
+find ${GCC_PREFIX} -name '*.la' -delete
+
+# Strip remaining libraries that install-strip might have missed
+find ${GCC_PREFIX}/lib* -name '*.a' -exec strip --strip-debug {} \; 2>/dev/null || true
+find ${GCC_PREFIX}/lib* -name '*.so*' -exec strip --strip-unneeded {} \; 2>/dev/null || true
+find ${GCC_PREFIX}/libexec -type f -executable -exec strip --strip-unneeded {} \; 2>/dev/null || true
 
 # Verify
 ${GCC_PREFIX}/bin/gcc --version
