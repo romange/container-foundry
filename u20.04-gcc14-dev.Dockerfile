@@ -3,7 +3,8 @@ FROM ubuntu:20.04
 
 LABEL org.opencontainers.image.source="https://github.com/romange/container-foundry"
 
-COPY ./get_mold.sh  /tmp/
+COPY ./get_mold.sh /tmp/
+COPY ./get_binutils.sh /tmp/
 COPY ./get_gcc14.sh /tmp/
 COPY ./get_openssl.sh /tmp/
 COPY ./install_versioned_redis.sh /tmp/
@@ -21,8 +22,8 @@ RUN apt update && apt install -y autoconf-archive bison cmake curl gdb git perl 
     libgmp-dev libmpfr-dev libmpc-dev flex texinfo file \
     && rm -rf /var/lib/apt/lists/*
 
-# Build and install GCC 14
-RUN /tmp/get_gcc14.sh
+# Build and install binutils 2.42 and GCC 14
+RUN /tmp/get_binutils.sh && /tmp/get_gcc14.sh
 
 # Set up environment to use GCC 14
 ENV PATH="/opt/gcc-14/bin:${PATH}" \
