@@ -5,6 +5,7 @@ LABEL org.opencontainers.image.source="https://github.com/romange/container-foun
 
 COPY ./get_mold.sh /tmp/
 COPY ./get_openssl.sh /tmp/
+COPY ./get_promtool.sh /tmp/
 COPY ./install_versioned_redis.sh /tmp/
 COPY ./install_python_deps.sh /tmp/
 
@@ -22,6 +23,7 @@ RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 40  \
     --slave /usr/bin/g++ g++ /usr/bin/g++-9
 
 RUN /tmp/get_mold.sh
+RUN /tmp/get_promtool.sh
 RUN /tmp/install_versioned_redis.sh redis-server redis-server-6.2.11 https://github.com/redis/redis/archive/6.2.11.tar.gz
 RUN /tmp/install_versioned_redis.sh redis-server redis-server-7.2.2 https://github.com/redis/redis/archive/7.2.2.tar.gz
 RUN /tmp/install_versioned_redis.sh valkey-server valkey-server-8.0.1 https://github.com/valkey-io/valkey/archive/refs/tags/8.0.1.tar.gz
