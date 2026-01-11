@@ -13,7 +13,7 @@ LABEL org.opencontainers.image.source="https://github.com/romange/container-foun
 
 RUN apk add autoconf-archive automake bash bison boost-dev boost-static cmake coreutils \
         curl ccache clang flex-dev git gcc gdb g++ libunwind-dev libtool pcre2-dev make ninja \
-        openssl-dev patch zip zstd-dev lsof flatbuffers-dev moreutils
+        openssl-dev patch zip zstd-dev lsof flatbuffers-dev moreutils py3-pip py3-pytest
 RUN apk add --no-cache tar
 
 # currently for aarch64 there is no mold
