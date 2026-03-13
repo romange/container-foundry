@@ -24,18 +24,18 @@ jobs:
           - name: "alpine-dev"
             tag: latest
             file: alpine-dev.Dockerfile
-          - name: "ubuntu-dev"
-            tag: 20
-            file: u20.04-dev.Dockerfile
+          # - name: "ubuntu-dev"
+          #   tag: 20
+          #   file: u20.04-dev.Dockerfile
           - name: "ubuntu-dev"
             tag: 20-gcc14
             file: u20.04-gcc14-dev.Dockerfile
-          - name: "ubuntu-dev"
-            tag: 22
-            file: u22.04-dev.Dockerfile
-          - name: "fedora"
-            tag: 30
-            file: fedora30-dev.Dockerfile
+          # - name: "ubuntu-dev"
+          #   tag: 22
+          #   file: u22.04-dev.Dockerfile
+          # - name: "fedora"
+          #   tag: 30
+          #   file: fedora30-dev.Dockerfile
           - name: "fedora"
             tag: 30-gcc14
             file: fedora30-gcc14-dev.Dockerfile
@@ -103,7 +103,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ matrix.distro.name }}-${{ matrix.distro.tag }}-${{ matrix.image.arch }}
+          name: digests-${{ matrix.distro.name }}_${{ matrix.distro.tag }}_${{ matrix.image.arch }}
           path: /tmp/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -116,18 +116,18 @@ jobs:
         image:
           - name: alpine-dev
             tag: latest
-          - name: ubuntu-dev
-            tag: 20
+          # - name: ubuntu-dev
+          #   tag: 20
           - name: ubuntu-dev
             tag: 20-gcc14
-          - name: ubuntu-dev
-            tag: 22
+          # - name: ubuntu-dev
+          #   tag: 22
           - name: ubuntu-dev
             tag: 24
           - name: ubuntu-dev
             tag: 24-afl
-          - name: fedora
-            tag: 30
+          # - name: fedora
+          #   tag: 30
           - name: fedora
             tag: 30-gcc14
           - name: fedora
@@ -143,7 +143,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: /tmp/digests
-          pattern: digests-${{ matrix.image.name }}-${{ matrix.image.tag }}-*
+          pattern: digests-${{ matrix.image.name }}_${{ matrix.image.tag }}_*
           merge-multiple: true
 
       - name: Login to GitHub Container Registry

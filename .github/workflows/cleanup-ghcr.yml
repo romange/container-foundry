@@ -1,0 +1,31 @@
+name: GHCR Retention Policy
+
+on:
+  schedule:
+    # Run automatically every week on Sunday at midnight
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    # Allow manual triggering from the GitHub Actions UI
+
+jobs:
+  clean-untagged-images:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        image: 
+          - alpine-dev
+          - ubuntu-dev
+          - fedora
+    
+    steps:
+      - name: Delete untagged images for ${{ matrix.image }}
+        uses: actions/delete-package-versions@v5.0.0
+        continue-on-error: true
+        with:
+          package-name: ${{ matrix.image }}
+          package-type: container
+          min-versions-to-keep: 5
+          delete-only-untagged-versions: true
