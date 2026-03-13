@@ -24,18 +24,18 @@ jobs:
           - name: "alpine-dev"
             tag: latest
             file: alpine-dev.Dockerfile
-          - name: "ubuntu-dev"
-            tag: 20
-            file: u20.04-dev.Dockerfile
+          # - name: "ubuntu-dev"
+          #   tag: 20
+          #   file: u20.04-dev.Dockerfile
           - name: "ubuntu-dev"
             tag: 20-gcc14
             file: u20.04-gcc14-dev.Dockerfile
-          - name: "ubuntu-dev"
-            tag: 22
-            file: u22.04-dev.Dockerfile
-          - name: "fedora"
-            tag: 30
-            file: fedora30-dev.Dockerfile
+          # - name: "ubuntu-dev"
+          #   tag: 22
+          #   file: u22.04-dev.Dockerfile
+          # - name: "fedora"
+          #   tag: 30
+          #   file: fedora30-dev.Dockerfile
           - name: "fedora"
             tag: 30-gcc14
             file: fedora30-gcc14-dev.Dockerfile
@@ -116,18 +116,18 @@ jobs:
         image:
           - name: alpine-dev
             tag: latest
-          - name: ubuntu-dev
-            tag: 20
+          # - name: ubuntu-dev
+          #   tag: 20
           - name: ubuntu-dev
             tag: 20-gcc14
-          - name: ubuntu-dev
-            tag: 22
+          # - name: ubuntu-dev
+          #   tag: 22
           - name: ubuntu-dev
             tag: 24
           - name: ubuntu-dev
             tag: 24-afl
-          - name: fedora
-            tag: 30
+          # - name: fedora
+          #   tag: 30
           - name: fedora
             tag: 30-gcc14
           - name: fedora
