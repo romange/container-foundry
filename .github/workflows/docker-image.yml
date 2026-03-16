@@ -33,9 +33,9 @@ jobs:
           # - name: "ubuntu-dev"
           #   tag: 22
           #   file: u22.04-dev.Dockerfile
-          # - name: "fedora"
-          #   tag: 30
-          #   file: fedora30-dev.Dockerfile
+          - name: "fedora"
+            tag: 30
+            file: fedora30-dev.Dockerfile
           - name: "fedora"
             tag: 30-gcc14
             file: fedora30-gcc14-dev.Dockerfile
@@ -126,8 +126,8 @@ jobs:
             tag: 24
           - name: ubuntu-dev
             tag: 24-afl
-          # - name: fedora
-          #   tag: 30
+          - name: fedora
+            tag: 30
           - name: fedora
             tag: 30-gcc14
           - name: fedora

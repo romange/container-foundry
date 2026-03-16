@@ -16,6 +16,7 @@ mkdir prom
 
 tar xzf prom.tgz -C prom --strip-components=1 && rm prom.tgz
 mv prom/promtool /usr/local/bin
+strip /usr/local/bin/promtool
 
 promtool --version
 rm -rf prom
