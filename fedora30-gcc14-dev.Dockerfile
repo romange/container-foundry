@@ -8,12 +8,12 @@ RUN sed -i 's|^metalink=|#metalink=|g' /etc/yum.repos.d/*.repo && \
     sed -i 's|^#baseurl=http://download.fedoraproject.org/pub/fedora/linux/|baseurl=https://archives.fedoraproject.org/pub/archive/fedora/linux/|g' /etc/yum.repos.d/*.repo && \
     sed -i 's|^#baseurl=http://download.example/pub/fedora/linux/|baseurl=https://archives.fedoraproject.org/pub/archive/fedora/linux/|g' /etc/yum.repos.d/*.repo
 
-COPY ./install_boost.sh ./get_cmake.sh ./get_gcc14.sh /tmp/
+COPY ./install_boost.sh ./get_cmake.sh ./get_gcc14.sh ./get_openssl.sh /tmp/
 
 # Install base development tools and GCC 14 build dependencies
 RUN dnf install -y automake gcc-c++ git libtool make ninja-build \
-     openssl-devel libunwind-devel autoconf-archive patch wget bzip2 xz tar \
-     openssl-static pcre2-devel zlib-devel gdb ccache \
+     libunwind-devel autoconf-archive patch wget bzip2 xz tar curl \
+     pcre2-devel zlib-devel gdb ccache perl-IPC-Cmd \
      gmp-devel mpfr-devel libmpc-devel flex texinfo diffutils file which
 
 RUN dnf install -y bison libzstd-static --releasever=32
@@ -23,9 +23,13 @@ RUN /tmp/get_gcc14.sh
 
 # Set up environment to use GCC 14
 ENV PATH="/opt/gcc-14/bin:${PATH}" \
-    LD_LIBRARY_PATH="/opt/gcc-14/lib64:${LD_LIBRARY_PATH}" \
+    LD_LIBRARY_PATH="/opt/gcc-14/lib64" \
     CC="/opt/gcc-14/bin/gcc" \
-    CXX="/opt/gcc-14/bin/g++"
+    CXX="/opt/gcc-14/bin/g++" \
+    OPENSSL_ROOT_DIR="/usr/local/ssl"
+
+# Build and install OpenSSL (static)
+RUN /tmp/get_openssl.sh
 
 # Install Boost and CMake
 RUN /tmp/install_boost.sh && /tmp/get_cmake.sh
