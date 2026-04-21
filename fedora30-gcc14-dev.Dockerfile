@@ -13,7 +13,7 @@ COPY ./install_boost.sh ./get_cmake.sh ./get_gcc14.sh ./get_openssl.sh /tmp/
 # Install base development tools and GCC 14 build dependencies
 RUN dnf install -y automake gcc-c++ git libtool make ninja-build \
      libunwind-devel autoconf-archive patch wget bzip2 xz tar curl \
-     pcre2-devel zlib-devel gdb ccache perl-IPC-Cmd \
+     pcre2-devel zlib-devel gdb ccache perl-IPC-Cmd perl-Time-Piece \
      gmp-devel mpfr-devel libmpc-devel flex texinfo diffutils file which
 
 RUN dnf install -y bison libzstd-static --releasever=32
