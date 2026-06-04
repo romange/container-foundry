@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-AFL_VERSION=${AFL_VERSION:-v4.34c}
+AFL_VERSION=${AFL_VERSION:-v5.00c}
 
 cd /tmp
 git clone --depth=1 --branch "$AFL_VERSION" https://github.com/AFLplusplus/AFLplusplus.git
