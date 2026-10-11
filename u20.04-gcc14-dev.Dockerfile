@@ -18,7 +18,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y autoconf-archive bison cmake curl gdb git perl \
     libunwind-dev libfl-dev ninja-build libtool libpcre2-dev redis-tools wget \
     gcc g++ libboost-context-dev zip ccache libzstd-dev \
-    debhelper moreutils pip jq lsof lcov libflatbuffers-dev pkg-config \
+    debhelper moreutils pip jq lsof lcov libflatbuffers-dev pkg-config iproute2 \
     # GCC 14 build dependencies
     libgmp-dev libmpfr-dev libmpc-dev flex texinfo file \
     && rm -rf /var/lib/apt/lists/*
