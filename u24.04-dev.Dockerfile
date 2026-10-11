@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y autoconf-archive bison cmake curl gdb git libssl-dev \
     libunwind-dev libfl-dev ninja-build libtool \
     libboost-context-dev libpcre2-dev zip ccache libzstd-dev \
-    debhelper moreutils pip jq lsof lcov libflatbuffers-dev redis-tools wget \
+    debhelper moreutils pip jq lsof lcov libflatbuffers-dev redis-tools wget iproute2 \
     && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
 
 RUN /tmp/get_clang.sh 21

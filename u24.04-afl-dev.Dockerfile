@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y autoconf-archive bison clang cmake curl gdb git libssl-dev \
     libunwind-dev libfl-dev ninja-build libtool \
     libboost-context-dev libpcre2-dev libxml2-dev zip ccache libzstd-dev \
-    debhelper moreutils pip jq lsof lcov libflatbuffers-dev wget \
+    debhelper moreutils pip jq lsof lcov libflatbuffers-dev wget iproute2 \
     # AFL++ dependencies
     clang-18 llvm-18 llvm-18-dev lld-18 \
     build-essential python3-dev automake flex libglib2.0-dev libpixman-1-dev \

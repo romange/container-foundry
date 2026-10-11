@@ -92,7 +92,7 @@ jobs:
           docker buildx imagetools inspect ${{ env.image_base }}:sha256@${{ steps.build.outputs.digest }}
 
       - name: Test Docker image
-        run: docker run --rm "${{ env.image_base }}:sha256@${{ steps.build.outputs.digest }}" echo succeeded
+        run: docker run --rm "${{ env.image_base }}:sha256@${{ steps.build.outputs.digest }}" sh -c 'ip -V && ss -V && echo succeeded'
 
       - name: Export digest
         run: |

@@ -16,7 +16,7 @@ RUN apt update
 RUN apt install -y autoconf-archive bison cmake curl gdb git perl \
     libunwind-dev libfl-dev ninja-build libtool libpcre2-dev redis-tools wget \
     gcc-9 g++-9 libboost-context-dev zip ccache libzstd-dev \
-    debhelper moreutils pip jq lsof lcov libflatbuffers-dev pkg-config \
+    debhelper moreutils pip jq lsof lcov libflatbuffers-dev pkg-config iproute2 \
     && rm -rf /var/lib/apt/lists/*
     
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 40  \

@@ -4,7 +4,7 @@ FROM centos:7.9.2009
 COPY ./install_boost.sh /tmp/
 
 RUN yum update -y && yum install -y automake libtool git epel-release make \
-    autoconf-archive patch wget bzip2 \
+    autoconf-archive patch wget bzip2 iproute \
     zlib-devel centos-release-scl 
 
 RUN yum install -y devtoolset-11-gcc-c++ cmake3 ninja-build \
