@@ -45,6 +45,9 @@ jobs:
           - name: "ubuntu-dev"
             tag: 24-afl
             file: u24.04-afl-dev.Dockerfile
+          - name: "ubuntu-dev"
+            tag: 26
+            file: u26.04-dev.Dockerfile
           - name: "fedora"
             tag: 41
             file: fedora41-dev.Dockerfile
@@ -126,6 +129,8 @@ jobs:
             tag: 24
           - name: ubuntu-dev
             tag: 24-afl
+          - name: ubuntu-dev
+            tag: 26
           - name: fedora
             tag: 30
           - name: fedora
