@@ -3,6 +3,7 @@ name: Docker Image CI
 on:
   push:
     branches: [main, Pr1]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -14,9 +15,64 @@ concurrency:
 
 jobs:
   # ===============================================================
+  #   PR check: build all images locally, no registry push
+  # ===============================================================
+  pr_check:
+    if: github.event_name == 'pull_request'
+    strategy:
+      max-parallel: 6
+      matrix:
+        distro:
+          - name: "alpine-dev"
+            tag: latest
+            file: alpine-dev.Dockerfile
+          - name: "ubuntu-dev"
+            tag: 20-gcc14
+            file: u20.04-gcc14-dev.Dockerfile
+          - name: "fedora"
+            tag: 30
+            file: fedora30-dev.Dockerfile
+          - name: "fedora"
+            tag: 30-gcc14
+            file: fedora30-gcc14-dev.Dockerfile
+          - name: "ubuntu-dev"
+            tag: 24
+            file: u24.04-dev.Dockerfile
+          - name: "ubuntu-dev"
+            tag: 24-afl
+            file: u24.04-afl-dev.Dockerfile
+          - name: "fedora"
+            tag: 41
+            file: fedora41-dev.Dockerfile
+        image:
+          - name: ubuntu-24.04
+            arch: amd64
+          - name: ubuntu-24.04-arm
+            arch: arm64
+
+    runs-on: ${{ matrix.image.name }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          provenance: false
+          platforms: linux/${{ matrix.image.arch }}
+          file: ${{ matrix.distro.file }}
+          load: true
+          tags: pr-test:${{ matrix.distro.name }}-${{ matrix.distro.tag }}
+
+      - name: Test Docker image
+        run: docker run --rm "pr-test:${{ matrix.distro.name }}-${{ matrix.distro.tag }}" echo succeeded
+
+  # ===============================================================
   #   Building Dev Image
   # ===============================================================
   build_dev:
+    if: github.event_name != 'pull_request'
     strategy:
       max-parallel: 6
       matrix:
